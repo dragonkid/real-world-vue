@@ -3,37 +3,18 @@
     <h1>Test here</h1>
     <span :title="title">mouse hover for information</span>
     <div class="demo">
-      <p>Counter: {{ counter }}</p>
-      <button v-if="interval != null" :onClick="stopTimer">Stop Timer</button>
-      <button v-else :onClick="startTimer">Start Timer</button>
+      <CounterTimer></CounterTimer>
     </div>
   </div>
 </template>
 
 <script>
+import CounterTimer from "../components/CounterTimer.vue";
+
 export default {
-  data() {
-    return {
-      counter: 0,
-      interval: null,
-      myTimer: () => {
-        return setInterval(() => {
-          this.counter += 1;
-        }, 1000);
-      },
-    };
-  },
-  mounted() {
-    this.interval = this.myTimer();
-  },
-  methods: {
-    stopTimer() {
-      clearInterval(this.interval);
-      this.interval = null;
-    },
-    startTimer() {
-      this.interval = this.myTimer();
-    },
+  name: "TestView",
+  components: {
+    CounterTimer,
   },
   computed: {
     title() {
