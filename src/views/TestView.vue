@@ -1,20 +1,25 @@
 <template>
   <div class="test">
     <h1>Test here</h1>
-    <span :title="title">mouse hover for information</span>
+    <span v-bind:title="title">mouse hover for information</span>
     <div class="demo">
       <CounterTimer></CounterTimer>
+    </div>
+    <div class="demo">
+      <ModelExample></ModelExample>
     </div>
   </div>
 </template>
 
 <script>
 import CounterTimer from "../components/CounterTimer.vue";
+import ModelExample from "@/components/ModelExample.vue";
 
 export default {
   name: "TestView",
   components: {
     CounterTimer,
+    ModelExample,
   },
   computed: {
     title() {

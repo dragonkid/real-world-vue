@@ -1,8 +1,8 @@
 <template>
   <div>
     <p>Counter: {{ counter }}</p>
-    <button v-if="interval != null" :onClick="stopTimer">Stop Timer</button>
-    <button v-else :onClick="startTimer">Start Timer</button>
+    <button v-if="interval != null" v-on:click="stopTimer">Stop Timer</button>
+    <button v-else v-on:click="startTimer">Start Timer</button>
   </div>
 </template>
 
