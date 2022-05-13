@@ -2,24 +2,23 @@
   <div class="test">
     <h1>Test here</h1>
     <span v-bind:title="title">mouse hover for information</span>
-    <div class="demo">
-      <CounterTimer></CounterTimer>
-    </div>
-    <div class="demo">
-      <ModelExample></ModelExample>
-    </div>
+    <CounterTimer class="demo"></CounterTimer>
+    <ModelExample class="demo"></ModelExample>
+    <WatchExample class="demo"></WatchExample>
   </div>
 </template>
 
 <script>
 import CounterTimer from "../components/CounterTimer.vue";
 import ModelExample from "@/components/ModelExample.vue";
+import WatchExample from "@/components/WatchExample.vue";
 
 export default {
   name: "TestView",
   components: {
     CounterTimer,
     ModelExample,
+    WatchExample,
   },
   computed: {
     title() {
