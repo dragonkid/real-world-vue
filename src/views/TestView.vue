@@ -5,6 +5,7 @@
     <CounterTimer class="demo"></CounterTimer>
     <ModelExample class="demo"></ModelExample>
     <WatchExample class="demo"></WatchExample>
+    <TableExample class="demo"></TableExample>
   </div>
 </template>
 
@@ -12,6 +13,7 @@
 import CounterTimer from "../components/CounterTimer.vue";
 import ModelExample from "@/components/ModelExample.vue";
 import WatchExample from "@/components/WatchExample.vue";
+import TableExample from "@/components/TableExample.vue";
 
 export default {
   name: "TestView",
@@ -19,6 +21,7 @@ export default {
     CounterTimer,
     ModelExample,
     WatchExample,
+    TableExample,
   },
   computed: {
     title() {
@@ -30,8 +33,8 @@ export default {
 
 <style scoped>
 .test {
-  width: 60%;
-  max-width: 740px;
+  width: 70%;
+  min-width: 800px;
   margin: auto;
 }
 
