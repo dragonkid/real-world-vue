@@ -1,7 +1,7 @@
 <template>
   <a-table
     :columns="columns"
-    :row-key="(record) => record.login.uuid"
+    :row-key="(record) => record.group_id"
     :data-source="dataSource"
     :pagination="pagination"
     :loading="loading"
@@ -15,37 +15,39 @@ import { usePagination } from "vue-request";
 import { computed, defineComponent } from "vue";
 const columns = [
   {
-    title: "Name",
+    title: "Group Name",
     dataIndex: "name",
-    sorter: true,
+    // sorter: true,
     width: "20%",
-    slots: {
-      customRender: "name",
-    },
+    // slots: {
+    //   customRender: "name",
+    // },
   },
   {
-    title: "Gender",
-    dataIndex: "gender",
-    filters: [
-      {
-        text: "Male",
-        value: "male",
-      },
-      {
-        text: "Female",
-        value: "female",
-      },
-    ],
+    title: "Group ID",
+    dataIndex: "group_id",
+    // filters: [
+    //   {
+    //     text: "Male",
+    //     value: "male",
+    //   },
+    //   {
+    //     text: "Female",
+    //     value: "female",
+    //   },
+    // ],
     width: "20%",
   },
   {
-    title: "Email",
-    dataIndex: "email",
+    title: "Source",
+    dataIndex: "source",
   },
 ];
 
 const queryData = (params) => {
-  return `https://randomuser.me/api?noinfo&${new URLSearchParams(params)}`;
+  return `http://127.0.0.1:5000/api/v1/enterprise/groups?${new URLSearchParams(
+    params
+  )}`;
 };
 
 export default defineComponent({
@@ -57,24 +59,22 @@ export default defineComponent({
       current,
       pageSize,
     } = usePagination(queryData, {
-      formatResult: (res) => res.results,
+      formatResult: (res) => res.data,
       pagination: {
-        currentKey: "page",
-        pageSizeKey: "results",
+        currentKey: "offset",
+        pageSizeKey: "limit",
       },
     });
     const pagination = computed(() => ({
       total: 200,
-      current: current.value,
+      current: current.value / pageSize.value + 1,
       pageSize: pageSize.value,
     }));
 
     const handleTableChange = (pag, filters, sorter) => {
       run({
-        results: pag.pageSize,
-        page: pag?.current,
-        sortField: sorter.field,
-        sortOrder: sorter.order,
+        offset: (pag?.current - 1) * pag.pageSize,
+        limit: pag.pageSize,
         ...filters,
       });
     };
